@@ -6,7 +6,7 @@ import actions from "store/errors/actions";
 import loadingActions from "store/loading/actions";
 import { abi } from "config/contractAbi";
 import contractAddress from "config/contractAddress";
-
+import authActions from "features/auth/actions";
 export default function useLogin() {
   const dispatch = useDispatch();
   const [isConnected, setIsConnected] = useState(false);
@@ -80,6 +80,7 @@ export default function useLogin() {
     dispatch(loadingActions.updated({ value: false }));
     console.log(result);
     if (result.Login) {
+      dispatch(authActions.userSet({ user: result }));
       navigate("/dashboard");
     } else {
       dispatch(

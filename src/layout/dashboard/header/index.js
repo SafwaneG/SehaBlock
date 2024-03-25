@@ -9,7 +9,6 @@ import Iconify from "components/iconify/Iconify";
 //
 import AccountPopover from "./AccountPopover";
 import NotificationsPopover from "./notificationPopover/NotificationsPopover";
-import NewRequest from "./newRequest";
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +30,7 @@ const StyledRoot = styled(AppBar)(({ theme }) => ({
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   minHeight: HEADER_MOBILE,
   display: "flex",
-  justifyContent:"space-between",
+  justifyContent: "space-between",
 
   [theme.breakpoints.up("lg")]: {
     minHeight: HEADER_DESKTOP,
@@ -47,7 +46,7 @@ Header.propTypes = {
 
 export default function Header({ onOpenNav }) {
   return (
-    <StyledRoot >
+    <StyledRoot>
       <StyledToolbar>
         <IconButton
           onClick={onOpenNav}
