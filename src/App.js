@@ -18,14 +18,7 @@ const router = createBrowserRouter(
     <>
       <Route path="/" element={<features.auth.useCases.login />} />
 
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <DashboardLayout />
-          </ProtectedRoute>
-        }
-      >
+      <Route path="/dashboard" element={<DashboardLayout />}>
         {/* <Route
           path="users"
           element={

@@ -1,162 +1,146 @@
 import * as React from "react";
-//import MUI components
-import {
-  Button,
-  CssBaseline,
-  TextField,
-  Link,
-  Grid,
-  Box,
-  Container,
-} from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import doctorImage from "./assets/_90cc6613-3207-4beb-9a3e-3a19dbaa9888.jpg";
+import metaMask from "./assets/metamask-icon.webp";
+import Typography from "@mui/material/Typography";
+import useLogin from "./services";
+import SignUp from "../signUp";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-//import icons
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+const defaultTheme = createTheme();
 
-// import customStyles from "./styles.js";
-import styles from "./styles.js";
-//import useLogin custom hook from "service.js"
-import useLogin from "./services.js";
-import { isFocusable } from "@testing-library/user-event/dist/utils/index.js";
-
-export default function Login() {
-  //destructuring functions and states from custom hook "useLogin"
+export default function SignInSide() {
   const {
-    handleInputChange,
-    handleSubmit,
-    handleShowPassword,
-    handleEmailBlur,
-    loginData,
-    emailValid,
-    error,
-    showPassword,
-    resetPassword,
-    handleForgetPasswordClicked,
-    handleResetPassword,
+    onConnect,
+    isConnected,
+    disconnect,
+    onChange,
+    onSubmit,
+    isError,
+    formData,
+    isSignUpOpen,
+    handleClose,
+    handleSignUpOpen,
+    accountAddress,
   } = useLogin();
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ overflow: "hidden" }}>
-      <CssBaseline />
-      <Box sx={styles.box}>
-        <img src={require("./assets/dailyAppLogo.png")} alt="" />
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          noValidate
-          sx={styles.form}
-        >
-          {resetPassword ? (
-            <>
+    <ThemeProvider theme={defaultTheme}>
+      <Grid container component="main" sx={{ height: "100vh" }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: `url(${doctorImage})`,
+            backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box sx={{ mt: 1 }}>
               <TextField
-                onChange={handleInputChange}
                 margin="normal"
                 required
                 fullWidth
-                id="resetEmail"
-                type="email"
-                label="Email Address"
-                name="resetPasswordEmail"
-                autoComplete="email"
+                id="key"
+                label="Public Key"
+                name="publicKey"
+                value={formData.publicKey}
+                onChange={onChange}
                 autoFocus
-                value={loginData.resetPasswordEmail}
-                onBlur={handleEmailBlur}
-                inputProps={isFocusable}
               />
-              <Button
-                fullWidth
-                variant="contained"
-                sx={styles.loginButton}
-                onClick={handleResetPassword}
-              >
-                Reset Password
-              </Button>
-              <Grid container justifyContent="center">
-                <Grid item>
-                  <Link
-                    variant="body2"
-                    fontSize="medium"
-                    onClick={handleForgetPasswordClicked}
-                    sx={{ cursor: "pointer", fontSize: 20 }}
-                  >
-                    LogIn
-                  </Link>
-                </Grid>
-              </Grid>
-            </>
-          ) : (
-            <>
               <TextField
-                onChange={handleInputChange}
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                type="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                error={error || emailValid}
-                value={loginData.email}
-                onBlur={handleEmailBlur}
-                helperText={emailValid && "Invalid email address"}
-                inputProps={isFocusable}
-              />
-
-              <TextField
-                onChange={handleInputChange}
                 margin="normal"
                 required
                 fullWidth
                 name="password"
                 label="Password"
-                type={showPassword ? "text" : "password"}
+                type="password"
                 id="password"
                 autoComplete="current-password"
-                error={error}
-                value={loginData.password}
-                InputProps={{
-                  endAdornment: !showPassword ? (
-                    <VisibilityOffIcon
-                      onClick={handleShowPassword}
-                      sx={{ cursor: "pointer", opacity: 0.8 }}
-                      color="primary"
-                    />
-                  ) : (
-                    <VisibilityIcon
-                      onClick={handleShowPassword}
-                      sx={{ cursor: "pointer", opacity: 0.8 }}
-                      color="primary"
-                    />
-                  ),
-                }}
+                onChange={onChange}
               />
               <Button
                 fullWidth
                 variant="contained"
-                sx={styles.loginButton}
-                onClick={handleSubmit}
+                sx={{ mt: 3, mb: 1 }}
+                onClick={onSubmit}
               >
-                Log In
+                Sign In
               </Button>
-              <Grid container justifyContent="center">
-                <Grid item>
-                  <Link
-                    variant="body2"
-                    fontSize="medium"
-                    onClick={handleForgetPasswordClicked}
-                    sx={{ cursor: "pointer" }}
-                  >
-                    Forgotten password?
-                  </Link>
-                </Grid>
-              </Grid>
-            </>
-          )}
-        </Box>
-      </Box>
-    </Container>
+              <Button
+                type="submit"
+                fullWidth
+                variant="outlined"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={onConnect}
+              >
+                Sign In With meta Mask{" "}
+                {
+                  <Box
+                    sx={{
+                      width: 40,
+                      height: 40,
+                      backgroundImage: `url(${metaMask})`,
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      ml: 1,
+                    }}
+                  />
+                }
+              </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="outlined"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSignUpOpen}
+              >
+                Sign Up
+              </Button>
+            </Box>
+          </Box>
+        </Grid>
+        <SignUp
+          open={isSignUpOpen}
+          handleClose={handleClose}
+          accountAddress={accountAddress}
+        />
+      </Grid>
+    </ThemeProvider>
   );
 }
