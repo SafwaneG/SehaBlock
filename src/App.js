@@ -19,16 +19,16 @@ const router = createBrowserRouter(
       <Route path="/" element={<features.auth.useCases.login />} />
 
       <Route path="/dashboard" element={<DashboardLayout />}>
-        {/* <Route
-          path="users"
+        <Route
+          path="medicalRecord"
           element={
             <ProtectedRoute>
-              <ProtectedRole roles={["admin"]}>
-                <features.usersManagement.useCases.Main />
+              <ProtectedRole roles={["patient"]}>
+                <features.medicalRecord.useCases.Main />
               </ProtectedRole>
             </ProtectedRoute>
           }
-        /> */}
+        />
       </Route>
     </>
   )

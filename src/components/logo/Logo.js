@@ -1,7 +1,7 @@
 import { Link as RouterLink } from "react-router-dom";
 // @mui
 import { Box, Link } from "@mui/material";
-import dailyAppLogo from "./dailyAppLogo.png";
+import logo from "./logo.png";
 // ----------------------------------------------------------------------
 
 function Logo() {
@@ -10,12 +10,12 @@ function Logo() {
       <Box
         component="div"
         sx={{
-          width: "70%",
+          width: "40%",
           margin: "0 auto",
           display: "inline-flex",
         }}
       >
-        <img src={dailyAppLogo} alt="" />
+        <img src={logo} alt="" />
       </Box>
     </Link>
   );

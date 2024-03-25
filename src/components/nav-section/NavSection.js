@@ -21,16 +21,16 @@ NavSection.propTypes = {
   data: PropTypes.array,
 };
 
-export default function NavSection({ data = [], role, ...other }) {
+export default function NavSection({ data = [], userNature, ...other }) {
   return (
     <Box {...other}>
       <List disablePadding sx={{ p: 1 }}>
         {data.map((item, i) => (
           <div key={i}>
-            {item.usersAuth.includes(role) && (
+            {item.usersAuth.includes(userNature) && (
               <NavItem key={item.title} item={item} />
             )}
-            {item.usersAuth.includes(role) && item.divider && (
+            {item.usersAuth.includes(userNature) && item.divider && (
               <Divider sx={{ mb: 2, mt: 1 }} />
             )}
           </div>

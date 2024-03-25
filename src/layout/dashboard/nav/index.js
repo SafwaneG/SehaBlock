@@ -25,7 +25,7 @@ Nav.propTypes = {
 };
 
 export default function Nav({ openNav, onCloseNav }) {
-  const { role } = useSelector(authSelectors.user);
+  const { userNature } = useSelector(authSelectors.user);
   const { pathname } = useLocation();
   useEffect(() => {
     if (openNav) {
@@ -49,7 +49,6 @@ export default function Nav({ openNav, onCloseNav }) {
           sx: {
             width: NAV_WIDTH,
             bgcolor: "background.default",
-            borderRightStyle: "dashed",
           },
         }}
         ModalProps={{
@@ -70,7 +69,7 @@ export default function Nav({ openNav, onCloseNav }) {
           <Box sx={{ px: 2.5, py: 3, display: "inline-flex" }}>
             <Logo />
           </Box>
-          <NavSection data={navConfig} role={role} />
+          <NavSection data={navConfig} userNature={userNature} />
         </Scrollbar>
       </Drawer>
     </Box>
