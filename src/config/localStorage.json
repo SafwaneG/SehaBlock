@@ -1,0 +1,4 @@
+{
+	"userPersistKey": "connectedUser",
+	"tokenPersistKey": "token"
+}
