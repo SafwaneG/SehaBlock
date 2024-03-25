@@ -2,7 +2,7 @@ import axios from "axios";
 import config from "config";
 
 const mAxios = axios.create({
-  baseURL: config.global.apiUrl,
+  baseURL: "",
   withCredentials: false,
   crossDomain: true,
   headers: {

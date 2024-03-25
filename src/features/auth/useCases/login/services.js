@@ -1,105 +1,131 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import isEmail from "../../../../helpers/validators/isEmail";
-import { useDispatch, useSelector } from "react-redux";
-import actions from "features/auth/actions";
-import selectors from "features/auth/selectors";
-import helpers from "helpers";
-import config from "config";
+import Web3 from "web3";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import actions from "store/errors/actions";
+import loadingActions from "store/loading/actions";
+import { abi } from "config/contractAbi";
+import contractAddress from "config/contractAddress";
 
 export default function useLogin() {
-  
-  React.useEffect(() => {
-    helpers.persister.remove({ key: config.localStorage?.userPersistKey });
-    helpers.persister.remove({ key: config.localStorage?.tokenPersistKey });
-  }, []);
-
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { role } = useSelector(selectors.user);
-
-  const [resetPassword, setResetPassword] = useState(false);
-  const [loginData, setLoginData] = React.useState({
-    email: "",
-    password: "",
-    resetPasswordEmail: "",
+  const [isConnected, setIsConnected] = useState(false);
+  const [formData, setFormData] = useState({ publicKey: "", password: "" });
+  const [accountAddress, setAccountAddress] = useState("");
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+  const [isError, setIsError] = useState({
+    show: false,
+    message: "",
+    isError: false,
   });
-
-  const [error, setError] = React.useState(false);
-  const [emailValid, setEmailValid] = React.useState(false);
-  const [showPassword, setShowPassword] = React.useState(false);
-  const user = useSelector(selectors.user);
-  const token = useSelector(selectors.token);
-
-  const handleInputChange = (e) => {
-    setLoginData((prevData) => ({
-      ...prevData,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const navigateUser = (role) => {
-    if (role === "manager" || role === "admin" || role === "demandeur") {
-      navigate("/dashboard/requestList");
-    } else if (
-      role === "technician" ||
-      role === "respoStock" ||
-      role === "ingenieur"
-    ) {
-      navigate("/dashboard/taskList");
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setError(false);
-    const { email, password } = loginData;
-    if (!email || !password) {
-      setError(true);
-      return;
-    }
-    dispatch(actions.login(loginData));
-    // navigateUser(role);
-  };
-  const handleShowPassword = () => {
-    setShowPassword((prevValue) => !prevValue);
-  };
-
-  // Email Validation
-  const handleEmailBlur = () => {
-    if (!isEmail(loginData.email)) {
-      setEmailValid(true);
-    } else {
-      setEmailValid(false);
-    }
-  };
-  const handleForgetPasswordClicked = () => {
-    setResetPassword((prevState) => !prevState);
-  };
-
-  const handleResetPassword = () => {
-    dispatch(actions.resetPassword({ email: loginData.resetPasswordEmail }));
-  };
+  const web3 = new Web3(window.ethereum);
 
   useEffect(() => {
-    if (user && token) {
-      navigateUser(role);
-    } else {
-      navigate("/");
+    async function fetchAddress() {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      setFormData({ ...formData, publicKey: accounts[0] });
     }
-  }, [user, token]);
+    fetchAddress();
+  }, []);
+  const navigate = useNavigate();
 
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const detectCurrentProvider = () => {
+    let provider;
+    if (window.ethereum) {
+      provider = window.ethereum;
+    } else if (window.web3) {
+      provider = window.web3.currentProvider;
+    } else {
+      provider = "You should install MetaMask!";
+    }
+    return provider;
+  };
+
+  const onConnect = async () => {
+    const provider = detectCurrentProvider();
+    if (provider === "You should install MetaMask!") {
+      setIsError({ show: true, message: provider, isError: true });
+      return;
+    }
+    try {
+      await provider.request({ method: "eth_requestAccounts" });
+      const accounts = await web3.eth.getAccounts();
+      const account = accounts[0];
+      console.log(account);
+      console.log(web3.eth.Contract);
+      test(account);
+      setIsConnected(true);
+      // navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const disconnect = () => {
+    setIsConnected(false);
+  };
+
+  const contract = new web3.eth.Contract(abi, contractAddress.address);
+
+  const onSubmit = async () => {
+    dispatch(loadingActions.updated({ value: true }));
+    const result = await contract.methods
+      .login(formData.publicKey, formData.password)
+      .call();
+    dispatch(loadingActions.updated({ value: false }));
+    console.log(result);
+    if (result.Login) {
+      navigate("/dashboard");
+    } else {
+      dispatch(
+        actions.updated({
+          show: true,
+          message: result.errorMessage,
+          isSuccess: false,
+        })
+      );
+      setIsError({ show: true, message: result.errorMessage, isError: false });
+    }
+  };
+
+  const handleClose = () => {
+    setIsSignUpOpen(false);
+  };
+  const handleSignUpOpen = async () => {
+    setIsSignUpOpen(true);
+    const provider = detectCurrentProvider();
+    if (provider === "You should install MetaMask!") {
+      return;
+    }
+    try {
+      await provider.request({ method: "eth_requestAccounts" });
+      // const web3 = new Web3(provider);
+      const accounts = await web3.eth.getAccounts();
+
+      console.log(accounts);
+      const account = accounts[0];
+
+      setAccountAddress(account);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return {
-    handleInputChange,
-    handleSubmit,
-    handleShowPassword,
-    handleEmailBlur,
-    loginData,
-    error,
-    emailValid,
-    showPassword,
-    resetPassword,
-    handleForgetPasswordClicked,
-    handleResetPassword,
+    onConnect,
+    isConnected,
+    disconnect,
+    onChange,
+    onSubmit,
+    isError,
+    formData,
+    isSignUpOpen,
+    handleClose,
+    handleSignUpOpen,
+    accountAddress,
   };
 }
