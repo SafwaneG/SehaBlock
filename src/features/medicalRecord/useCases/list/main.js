@@ -15,14 +15,14 @@ export default function UserTable({
   handleRemoveClick,
   handleDetailsClick,
 }) {
-  const { users, userIds } = useUserTable();
-  const rows = userIds;
+  const { recordIds, records } = useUserTable();
+  const rows = recordIds;
   const columns = [
-    { id: "firstname", Label: "Prénom" },
-    { id: "lastname", Label: "Nom" },
-    { id: "grade", Label: "Grade" },
-    { id: "service", Label: "Service" },
-    { id: "actions", Label: "" },
+    { id: "recordId", Label: "Record Number" },
+    { id: "Fname", Label: "First Name" },
+    { id: "Lname", Label: "Last Name" },
+    { id: "date_consultation", Label: "Consultation Date" },
+    { id: "actions", Label: "Actions" },
   ];
 
   return (
@@ -72,26 +72,9 @@ export default function UserTable({
                   {columns.map((column) => {
                     const value =
                       column.id !== "actions" ? (
-                        users[row][column.id]
+                        records[row][column.id]
                       ) : (
                         <>
-                          <Button
-                            variant="outlined"
-                            size="small"
-                            sx={{ mr: 2 }}
-                            onClick={() => handleEditClick(users[row]?.id)}
-                          >
-                            Edit
-                          </Button>
-                          <Button
-                            variant="outlined"
-                            size="small"
-                            sx={{ mr: 2 }}
-                            color="error"
-                            onClick={() => handleRemoveClick(users[row]?.id)}
-                          >
-                            Delete
-                          </Button>
                           <Button
                             variant="outlined"
                             size="small"

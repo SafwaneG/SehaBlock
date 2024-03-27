@@ -42,7 +42,7 @@ for (let i = 0; i < 15; i++) {
 }
 
 const testState = {
-  users: {},
+  records: {},
   selected: "",
 };
 // console.log(testState.users);

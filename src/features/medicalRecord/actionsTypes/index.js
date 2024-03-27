@@ -1,15 +1,16 @@
-const USERS = "users ::: ";
+const RECORDS = "records ::: ";
 
 export default Object.freeze({
   // for saga
-  create: `${USERS}create`,
-  update: `${USERS}update`,
-  get: `${USERS}get`,
-  remove: `${USERS}remove`,
+  create: `${RECORDS}create`,
+  update: `${RECORDS}update`,
+  get: `${RECORDS}get`,
+  remove: `${RECORDS}remove`,
 
   // for reducer
-  updated: `${USERS}updated`,
-  merged: `${USERS}merged`,
-  selectedSet: `${USERS}selected/set`,
-  removed: `${USERS}removed`,
+  updated: `${RECORDS}updated`,
+  merged: `${RECORDS}merged`,
+  selectedSet: `${RECORDS}selected/set`,
+  removed: `${RECORDS}removed`,
+  addDoctor: `${RECORDS}addDoctor`,
 });

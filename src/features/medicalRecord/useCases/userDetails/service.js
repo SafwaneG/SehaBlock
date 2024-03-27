@@ -1,8 +1,11 @@
-import {  useSelector } from "react-redux";
-import selectors from "features/usersManagement/selectors";
+import { useSelector } from "react-redux";
+import selectors from "features/medicalRecord/selectors";
 function useDetailsUser() {
-  const selectedUser = useSelector(selectors.detailedSelected)
-  return { selectedUser };
+  const selectedRecord = useSelector((state) =>
+    selectors.detailedSelected(state)
+  );
+  console.log(selectedRecord, "kkd");
+  return { selectedRecord };
 }
 
 export default useDetailsUser;

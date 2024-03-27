@@ -9,7 +9,7 @@ import {
 import PersonIcon from "@mui/icons-material/Person";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
-function Details({ selectedUser }) {
+function Details({ selectedRecord }) {
   return (
     <Container>
       <Grid container justifyContent={"center"} spacing={2}>
@@ -25,7 +25,7 @@ function Details({ selectedUser }) {
             >
               <PersonIcon sx={{ color: "#37474f", fontSize: 24 }} />
               <Typography variant="h4">
-                {`Utilisateur--${selectedUser?.id}`}
+                {`Record--${selectedRecord?.recordId}`}
               </Typography>
             </Grid>
           </Paper>
@@ -43,8 +43,7 @@ function Details({ selectedUser }) {
               >
                 <PersonIcon sx={{ color: "#37474f", fontSize: 24 }} />
                 <Typography variant="body1">
-                  Nom Complet : {selectedUser?.firstname}{" "}
-                  {selectedUser?.lastname}
+                  Nom Complet : {selectedRecord?.Fname} {selectedRecord?.Lname}
                 </Typography>
               </Grid>
               <Grid
@@ -55,19 +54,9 @@ function Details({ selectedUser }) {
                 alignItems={"center"}
                 columnGap={1}
               >
-                <PhoneIcon sx={{ color: "#37474f", fontSize: 24 }} />
-                <Typography variant="body1">{selectedUser?.telephone}</Typography>
-              </Grid>
-              <Grid
-                item
-                container
-                xs={12}
-                sm={6}
-                alignItems={"center"}
-                columnGap={1}
-              >
-                <EmailIcon sx={{ color: "#37474f", fontSize: 24 }} />
-                <Typography variant="body1">{selectedUser?.email}</Typography>
+                <Typography variant="body1">
+                  Age: {selectedRecord?.age}
+                </Typography>
               </Grid>
             </Grid>
           </Paper>
@@ -87,7 +76,7 @@ function Details({ selectedUser }) {
                 columnGap={1}
               >
                 <Typography variant="body1">
-                  Rôle dans le service : {selectedUser?.serviceRole}
+                  Date de consultation : {selectedRecord?.date_consultation}
                 </Typography>
               </Grid>
               <Grid
@@ -99,7 +88,7 @@ function Details({ selectedUser }) {
                 columnGap={1}
               >
                 <Typography variant="body1">
-                  Rôle dans le porcessus : {selectedUser?.role}
+                  Diagnostic : {selectedRecord?.diagnostic}
                 </Typography>
               </Grid>
               <Grid
@@ -111,7 +100,7 @@ function Details({ selectedUser }) {
                 columnGap={1}
               >
                 <Typography variant="body1">
-                  Grade : {selectedUser?.grade}
+                  Observation Medicale : {selectedRecord?.observation_Medicale}
                 </Typography>
               </Grid>
               <Grid
@@ -123,7 +112,19 @@ function Details({ selectedUser }) {
                 columnGap={1}
               >
                 <Typography variant="body1">
-                  Service : {selectedUser?.service}
+                  Resultat de diagnostic : {selectedRecord?.resulta_diagnostic}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                container
+                xs={12}
+                sm={6}
+                alignItems={"center"}
+                columnGap={1}
+              >
+                <Typography variant="body1">
+                  Treatment : {selectedRecord?.treatment}
                 </Typography>
               </Grid>
             </Grid>

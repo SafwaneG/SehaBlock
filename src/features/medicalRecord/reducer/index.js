@@ -11,32 +11,28 @@ const reducer = (state = getInitialState(), action) => {
     switch (type) {
       case types.merged:
         if (
-          helpers.validator.isObject(payload?.users) &&
-          !helpers.validator.isEmptyObject(payload?.users)
+          helpers.validator.isArray(payload.records) &&
+          payload.records.length > 0
         )
-          Object.entries(payload.users).forEach(([id, user]) => {
-            if (
-              !helpers.validator.isEmptyObject(user) &&
-              !helpers.validator.isEmptyString(id)
-            )
-              draft.users[id] = user;
+          payload.records.forEach((record, i) => {
+            draft.records[i] = record;
           });
         break;
 
-      case types.updated:
-        if (
-          helpers.validator.isObject(payload?.user) &&
-          !helpers.validator.isEmptyObject(payload?.user) &&
-          !helpers.validator.isEmptyString(payload?.user?.id)
-        )
-          draft.users[payload.user.id] = payload.user;
-        break;
+      // case types.updated:
+      //   if (
+      //     helpers.validator.isObject(payload?.user) &&
+      //     !helpers.validator.isEmptyObject(payload?.user) &&
+      //     !helpers.validator.isEmptyString(payload?.user?.id)
+      //   )
+      //     draft.users[payload.user.id] = payload.user;
+      //   break;
 
       case types.selectedSet:
         draft.selected = payload?.id;
         break;
-      case types.removed:
-        delete draft.users[payload?.id];
+      // case types.removed:
+      //   delete draft.users[payload?.id];
       default:
         break;
     }

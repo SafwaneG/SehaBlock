@@ -3,13 +3,13 @@ import Modale from "../../../../components/modal/index";
 import Details from "./details";
 import useDetailsUser from "./service";
 export default function DetailsUser({ open, handleClose }) {
-  const { selectedUser } = useDetailsUser();
+  const { selectedRecord } = useDetailsUser();
 
   return (
     <Modale
       open={open}
       handleClose={handleClose}
-      renderContent={<Details selectedUser={selectedUser} />}
+      renderContent={<Details selectedRecord={selectedRecord} />}
     />
   );
 }

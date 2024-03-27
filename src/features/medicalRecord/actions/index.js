@@ -6,6 +6,7 @@ import update from "./update";
 import updated from "./updated";
 import remove from "./remove";
 import removed from "./removed";
+import addDoctor from "./addDoctor";
 
 export default Object.freeze({
   create,
@@ -16,4 +17,5 @@ export default Object.freeze({
   updated,
   remove,
   removed,
+  addDoctor,
 });
