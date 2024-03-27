@@ -95,6 +95,25 @@ export const abi = [
     type: "event",
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isRemoved",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "msg",
+        type: "string",
+      },
+    ],
+    name: "removedDoctor",
+    type: "event",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -252,12 +271,24 @@ export const abi = [
   },
   {
     inputs: [],
-    name: "getDoctorAuthorised",
+    name: "getDoctorAuthorisedInfo",
     outputs: [
       {
-        internalType: "address[]",
+        components: [
+          {
+            internalType: "address",
+            name: "doctorAddress",
+            type: "address",
+          },
+          {
+            internalType: "string",
+            name: "name",
+            type: "string",
+          },
+        ],
+        internalType: "struct User.DoctorInfo[]",
         name: "",
-        type: "address[]",
+        type: "tuple[]",
       },
     ],
     stateMutability: "view",

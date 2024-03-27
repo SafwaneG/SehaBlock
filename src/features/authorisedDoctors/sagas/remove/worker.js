@@ -1,12 +1,13 @@
-import helpers from "helpers";
-import config from "config";
 import Web3 from "web3";
 import { abi } from "config/contractAbi.js";
 import contractAddress from "config/contractAddress";
 import errorsActions from "store/errors/actions";
+import { put, select } from "redux-saga/effects";
+import selectors from "features/authorisedDoctors/selectors";
 import loadingActions from "store/loading/actions";
-import { put } from "redux-saga/effects";
-function* addDoctor({ payload, meta = {} }) {
+import actions from "features/authorisedDoctors/actions";
+
+function* removeWorker({ payload, meta = {} }) {
   const web3 = new Web3(window.ethereum);
   yield put(errorsActions.cleaned());
   const provider = window.ethereum;
@@ -15,13 +16,16 @@ function* addDoctor({ payload, meta = {} }) {
   const account = accounts[0];
   const contract = new web3.eth.Contract(abi, contractAddress.address);
   yield put(loadingActions.updated({ value: true }));
+  const doctor = yield select(selectors.detailedSelected);
   const result = yield contract.methods
-    .addAuthorisedDoctor(payload)
+    .removeDoctor(doctor.doctorAddress)
     .send({ from: account });
-  console.log(result, "result");
-  const event = result.events.authorisedDoctorevent.returnValues;
+  console.log(result, "result22");
+  const event = result.events.removedDoctor.returnValues;
+  yield put(loadingActions.updated({ value: false }));
 
-  if (event.isAdded) {
+  if (event.isRemoved) {
+    yield put(actions.removed({ id: payload }));
     yield put(
       errorsActions.updated({
         isSuccess: true,
@@ -38,7 +42,6 @@ function* addDoctor({ payload, meta = {} }) {
       })
     );
   }
-  yield put(loadingActions.updated({ value: false }));
 }
 
-export default addDoctor;
+export default removeWorker;

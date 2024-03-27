@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
   loading: loading.reducer,
   auth: features.auth.reducer,
   medicalRecord: features.medicalRecord.reducer,
+  authorisedDoctors: features.authorisedDoctors.reducer,
 });
 
 export default rootReducer;
