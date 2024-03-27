@@ -1,5 +1,5 @@
 import types from '../../actionsTypes'
 
-export default function merged({ users }) {
-  return { type: types.merged, payload: { users } };
+export default function merged({ records }) {
+  return { type: types.merged, payload: { records } };
 }

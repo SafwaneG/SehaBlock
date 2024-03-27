@@ -4,20 +4,14 @@ export const abi = [
     inputs: [
       {
         indexed: false,
-        internalType: "bytes32",
-        name: "prescriptionId",
-        type: "bytes32",
-      },
-      {
-        indexed: false,
         internalType: "address",
-        name: "doctor",
+        name: "patient",
         type: "address",
       },
       {
         indexed: false,
         internalType: "address",
-        name: "patient",
+        name: "doctor",
         type: "address",
       },
     ],
@@ -63,6 +57,44 @@ export const abi = [
     type: "event",
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isAdded",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "msg",
+        type: "string",
+      },
+    ],
+    name: "authorisedDoctorevent",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isCreated",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "msg",
+        type: "string",
+      },
+    ],
+    name: "recordCreated",
+    type: "event",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -92,11 +124,6 @@ export const abi = [
         name: "age",
         type: "uint256",
       },
-      {
-        internalType: "address",
-        name: "addressPatient",
-        type: "address",
-      },
     ],
     name: "addRecord",
     outputs: [],
@@ -105,11 +132,6 @@ export const abi = [
   },
   {
     inputs: [
-      {
-        internalType: "bytes32",
-        name: "prescriptionId",
-        type: "bytes32",
-      },
       {
         internalType: "address",
         name: "patient",
@@ -139,7 +161,7 @@ export const abi = [
           },
           {
             internalType: "bool",
-            name: "isSigned",
+            name: "signedbyPharmacie",
             type: "bool",
           },
         ],
@@ -154,13 +176,7 @@ export const abi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "ad",
-        type: "address",
-      },
-    ],
+    inputs: [],
     name: "getAllRecord",
     outputs: [
       {
@@ -201,9 +217,9 @@ export const abi = [
             type: "string",
           },
           {
-            internalType: "uint256",
+            internalType: "string",
             name: "date_consultation",
-            type: "uint256",
+            type: "string",
           },
           {
             internalType: "string",
@@ -235,17 +251,129 @@ export const abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "getDoctorAuthorised",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getPatientAuthorised",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
-        internalType: "bytes32",
-        name: "prescriptionId",
-        type: "bytes32",
+        internalType: "address",
+        name: "patient",
+        type: "address",
+      },
+    ],
+    name: "getPatientRecord",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "recordId",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "patient",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "timestamp",
+            type: "uint256",
+          },
+          {
+            internalType: "string",
+            name: "Fname",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "Lname",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "age",
+            type: "uint256",
+          },
+          {
+            internalType: "string",
+            name: "N_assurance",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "date_consultation",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "diagnostic",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "resulta_diagnostic",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "observation_Medicale",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "treatment",
+            type: "string",
+          },
+        ],
+        internalType: "struct User.Record[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "patient",
+        type: "address",
       },
     ],
     name: "getPrescriptionDetails",
     outputs: [
       {
         components: [
+          {
+            internalType: "uint256",
+            name: "id",
+            type: "uint256",
+          },
           {
             internalType: "address",
             name: "doctor",
@@ -280,7 +408,7 @@ export const abi = [
               },
               {
                 internalType: "bool",
-                name: "isSigned",
+                name: "signedbyPharmacie",
                 type: "bool",
               },
             ],
@@ -298,10 +426,15 @@ export const abi = [
             name: "signedByPatient",
             type: "bool",
           },
+          {
+            internalType: "bool",
+            name: "destroyPrescreption",
+            type: "bool",
+          },
         ],
-        internalType: "struct User.Prescription",
+        internalType: "struct User.Prescription[]",
         name: "",
-        type: "tuple",
+        type: "tuple[]",
       },
     ],
     stateMutability: "view",
@@ -349,13 +482,23 @@ export const abi = [
   {
     inputs: [
       {
-        internalType: "bytes32",
+        internalType: "address",
         name: "",
-        type: "bytes32",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     name: "prescriptions",
     outputs: [
+      {
+        internalType: "uint256",
+        name: "id",
+        type: "uint256",
+      },
       {
         internalType: "address",
         name: "doctor",
@@ -374,6 +517,11 @@ export const abi = [
       {
         internalType: "bool",
         name: "signedByPatient",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "destroyPrescreption",
         type: "bool",
       },
     ],
@@ -444,9 +592,9 @@ export const abi = [
         type: "string",
       },
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "date_consultation",
-        type: "uint256",
+        type: "string",
       },
       {
         internalType: "string",
@@ -521,27 +669,14 @@ export const abi = [
   {
     inputs: [
       {
-        internalType: "bytes32",
-        name: "prescriptionId",
-        type: "bytes32",
+        internalType: "address",
+        name: "patient",
+        type: "address",
       },
       {
         internalType: "uint256",
-        name: "medicationId",
+        name: "prescriptionIndex",
         type: "uint256",
-      },
-    ],
-    name: "removeMedication",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "bytes32",
-        name: "prescriptionId",
-        type: "bytes32",
       },
     ],
     name: "signByDoctor",
@@ -552,9 +687,14 @@ export const abi = [
   {
     inputs: [
       {
-        internalType: "bytes32",
-        name: "prescriptionId",
-        type: "bytes32",
+        internalType: "address",
+        name: "patient",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "prescriptionIndex",
+        type: "uint256",
       },
     ],
     name: "signByPatient",
@@ -565,9 +705,14 @@ export const abi = [
   {
     inputs: [
       {
-        internalType: "bytes32",
+        internalType: "address",
+        name: "patient",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
         name: "prescriptionId",
-        type: "bytes32",
+        type: "uint256",
       },
       {
         internalType: "uint256",
@@ -576,6 +721,44 @@ export const abi = [
       },
     ],
     name: "signedByPharmacy",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "patient",
+        type: "address",
+      },
+      {
+        internalType: "string",
+        name: "diagnostic",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "resulta_diagnostic",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "observation_Medicale",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "date_consultation",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "treatment",
+        type: "string",
+      },
+    ],
+    name: "updateMedicalInfo",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

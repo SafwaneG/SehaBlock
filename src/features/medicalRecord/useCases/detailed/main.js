@@ -11,24 +11,21 @@ import {
   Typography,
 } from "@mui/material";
 import useDetailed from "./service";
-function Detailed({ handleSaveButtonClicked, user, handleClose }) {
+function Detailed({ handleSaveButtonClicked, handleClose }) {
   const {
     formData,
-    processRoles,
-    serviceRoles,
-    grades,
-    services,
     handleChange,
     handleBlur,
     userFirstNameFilledError,
     userLastNameFilledError,
-    userPhoneFilledError,
-    userGradeFilledError,
-    userServiceFilledError,
-    userProcessRoleFilledError,
-    userServiceRoleFilledError,
-    validation,
-  } = useDetailed(user);
+    userAgeFilledError,
+    consultationDateFilledError,
+    diagnosticFilledError,
+    medicalObervationFilledError,
+    diagnosticResultFilledError,
+    treatmentFilledError,
+    userNature,
+  } = useDetailed();
 
   return (
     <Container>
@@ -37,11 +34,11 @@ function Detailed({ handleSaveButtonClicked, user, handleClose }) {
           <TextField
             required
             fullWidth
-            name="firstname"
+            name="firstName"
             label="First Name"
             id="firstName"
             variant="outlined"
-            value={formData.firstname}
+            value={formData.firstName}
             onChange={handleChange}
             onBlur={handleBlur}
             error={userFirstNameFilledError}
@@ -52,11 +49,11 @@ function Detailed({ handleSaveButtonClicked, user, handleClose }) {
           <TextField
             required
             fullWidth
-            name="lastname"
-            label="last Name"
+            name="lastName"
+            label="Last Name"
             id="lastName"
             variant="outlined"
-            value={formData.lastname}
+            value={formData.lastName}
             onChange={handleChange}
             onBlur={handleBlur}
             error={userLastNameFilledError}
@@ -65,151 +62,118 @@ function Detailed({ handleSaveButtonClicked, user, handleClose }) {
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
+            required
             fullWidth
-            name="email"
-            label="Email"
-            id="email"
+            name="age"
+            label="Age"
+            id="age"
             variant="outlined"
-            value={formData.email}
+            value={formData.age}
             onChange={handleChange}
             onBlur={handleBlur}
+            error={userAgeFilledError}
+            helperText={userAgeFilledError && "age is required"}
           />
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
+            sx={{ backgroundColor: "#eeeeee", borderRadius: 1 }}
+            disabled={userNature === "patient"}
             required
             fullWidth
-            name="telephone"
-            label="Tel"
-            placeholder="eg, +212 6 XX XX XX XX"
-            id="telephone"
+            name="consultationDate"
+            label="Date de consultation"
+            id="consultationDate"
             variant="outlined"
-            value={formData.telephone}
+            value={formData.consultationDate}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={userPhoneFilledError}
-            helperText={userPhoneFilledError && "Phone number is required"}
+            error={consultationDateFilledError}
+            helperText={
+              consultationDateFilledError && "consultation date is required"
+            }
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={4}>
+          <TextField
+            sx={{ backgroundColor: "#eeeeee", borderRadius: 1 }}
+            disabled={userNature === "patient"}
+            required
+            fullWidth
+            name="diagnostic"
+            label=" Diagnostic"
+            id="diagnostic"
+            variant="outlined"
+            value={formData.consultationDate}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={diagnosticFilledError}
+            helperText={diagnosticFilledError && "Diagnostic is required"}
           />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Rôle service</InputLabel>
-            <Select
-              required
-              name="serviceRole"
-              id="serviceRole"
-              label="Rôle service"
-              value={formData.serviceRole}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={userServiceRoleFilledError}
-            >
-              {serviceRoles.map((role) => (
-                <MenuItem key={role.id} value={role.label}>
-                  {role.label}
-                </MenuItem>
-              ))}
-            </Select>
-            {userServiceRoleFilledError && (
-              <FormHelperText sx={{ color: "red" }}>
-                Sélectionne le rôle dans le service.
-              </FormHelperText>
-            )}
-          </FormControl>
+          <TextField
+            sx={{ backgroundColor: "#eeeeee", borderRadius: 1 }}
+            disabled={userNature === "patient"}
+            required
+            fullWidth
+            name="medicalObservation"
+            label=" Observation Medicale"
+            id=" medicalObservation"
+            variant="outlined"
+            value={formData.consultationDate}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={medicalObervationFilledError}
+            helperText={
+              medicalObervationFilledError && "Medical Observation is required"
+            }
+          />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Rôle processus
-            </InputLabel>
-            <Select
-              required
-              name="role"
-              id="role"
-              label="Rôle processus"
-              value={formData.role}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={userProcessRoleFilledError}
-            >
-              {processRoles.map((role) => (
-                <MenuItem key={role.id} value={role.label}>
-                  {role.label}
-                </MenuItem>
-              ))}
-            </Select>
-            {userProcessRoleFilledError && (
-              <FormHelperText sx={{ color: "red" }}>
-                Sélectionne le rôle dans le processus.
-              </FormHelperText>
-            )}
-          </FormControl>
+          <TextField
+            sx={{ backgroundColor: "#eeeeee", borderRadius: 1 }}
+            required
+            disabled={userNature === "patient"}
+            fullWidth
+            name="diagnosticResult"
+            label=" Resultat de diagnostic"
+            id=" diagnosticResult"
+            variant="outlined"
+            value={formData.consultationDate}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={diagnosticResultFilledError}
+            helperText={
+              diagnosticResultFilledError && "Diagnostic Result is required"
+            }
+          />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Service</InputLabel>
-            <Select
-              required
-              name="service"
-              id="service"
-              label="Service"
-              value={formData.service}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={userServiceFilledError}
-            >
-              {services.map((service) => (
-                <MenuItem key={service.id} value={service.label}>
-                  {service.label}
-                </MenuItem>
-              ))}
-            </Select>
-            {userServiceFilledError && (
-              <FormHelperText sx={{ color: "red" }}>
-                Sélectionne le service.
-              </FormHelperText>
-            )}
-          </FormControl>
+          <TextField
+            sx={{ backgroundColor: "#eeeeee", borderRadius: 1 }}
+            disabled={userNature === "patient"}
+            required
+            fullWidth
+            name="treatment "
+            label=" Treatment "
+            id="treatment "
+            variant="outlined"
+            value={formData.consultationDate}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={treatmentFilledError}
+            helperText={treatmentFilledError && "Treatment  is required"}
+          />
         </Grid>
+        <Grid item xs={12} sm={4}></Grid>
         <Grid item xs={12} sm={4}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Grade</InputLabel>
-            <Select
-              required
-              name="grade"
-              id="grade"
-              label="Grade"
-              value={formData.grade}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={userGradeFilledError}
-            >
-              {grades.map((grade) => (
-                <MenuItem key={grade.id} value={grade.label}>
-                  {grade.label}
-                </MenuItem>
-              ))}
-            </Select>
-            {userGradeFilledError && (
-              <FormHelperText sx={{ color: "red" }}>
-                Sélectionne le grade.
-              </FormHelperText>
-            )}
-          </FormControl>
-        </Grid>
-        <Grid
-          container
-          item
-          xs={12}
-          sm={12}
-          justifyContent={"center"}
-          sx={{ mt: 1 }}
-        >
           <Grid item>
             <Button
               sx={{ mr: 2 }}
               variant="contained"
-              onClick={() => handleSaveButtonClicked(formData, validation)}
+              onClick={() => handleSaveButtonClicked(formData)}
             >
               Enregistrer
             </Button>

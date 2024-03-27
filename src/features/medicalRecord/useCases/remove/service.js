@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import actions from "features/usersManagement/actions";
-import selectors from "features/usersManagement/selectors";
+// import selectors from "features/usersManagement/selectors";
 function useRemoveUser(handleClose) {
-  const selectedUser = useSelector((state) => selectors.selected(state));
+  const selectedUser = {};
   const dispatch = useDispatch();
   const handleConfirmRemove = () => {
-    dispatch(actions.remove({ id: selectedUser }));
+    // dispatch(actions.remove({ id: selectedUser }));
     handleClose();
   };
   const handleCancelRemove = () => {

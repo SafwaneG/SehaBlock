@@ -5,6 +5,7 @@ import filteredByRole from "./filteredByRole";
 import selected from "./selected";
 import isUsersFetched from "./isUsersFetched";
 import isEmailAlreadyUsed from "./isEmailAlreadyUsed";
+import all from "./all";
 
 export default Object.freeze({
   filteredIds,
@@ -14,4 +15,5 @@ export default Object.freeze({
   selected,
   isUsersFetched,
   isEmailAlreadyUsed,
+  all,
 });

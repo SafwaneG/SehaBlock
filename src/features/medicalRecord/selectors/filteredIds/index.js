@@ -1,14 +1,14 @@
-import { memoize } from 'proxy-memoize'
-import selectAll from '../all'
+import { memoize } from "proxy-memoize";
+import selectAll from "../all";
 
-export default memoize(state => {
-	let result = []
+export default memoize((state) => {
+  let result = [];
 
-	const all = selectAll(state)
+  const all = selectAll(state);
 
-	Object.entries(all).forEach(([key, _]) => {
-		result.push(key)
-	})
+  Object.entries(all).forEach(([key, _]) => {
+    result.push(key);
+  });
 
-	return result
-})
+  return result;
+});

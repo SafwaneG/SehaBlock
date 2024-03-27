@@ -22,11 +22,9 @@ const router = createBrowserRouter(
         <Route
           path="medicalRecord"
           element={
-            <ProtectedRoute>
-              <ProtectedRole roles={["patient"]}>
-                <features.medicalRecord.useCases.Main />
-              </ProtectedRole>
-            </ProtectedRoute>
+            // <ProtectedRole roles={["patient"]}>
+              <features.medicalRecord.useCases.Main />
+            // </ProtectedRole>
           }
         />
       </Route>
