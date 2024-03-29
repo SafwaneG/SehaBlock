@@ -42,6 +42,25 @@ export const abi = [
     inputs: [
       {
         indexed: false,
+        internalType: "bool",
+        name: "isUpdated",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "msg",
+        type: "string",
+      },
+    ],
+    name: "RecordUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
         internalType: "string",
         name: "message",
         type: "string",
@@ -286,7 +305,7 @@ export const abi = [
             type: "string",
           },
         ],
-        internalType: "struct User.DoctorInfo[]",
+        internalType: "struct User.UserInfo[]",
         name: "",
         type: "tuple[]",
       },
@@ -296,12 +315,24 @@ export const abi = [
   },
   {
     inputs: [],
-    name: "getPatientAuthorised",
+    name: "getPatientAuthorisedInfo",
     outputs: [
       {
-        internalType: "address[]",
+        components: [
+          {
+            internalType: "address",
+            name: "doctorAddress",
+            type: "address",
+          },
+          {
+            internalType: "string",
+            name: "name",
+            type: "string",
+          },
+        ],
+        internalType: "struct User.UserInfo[]",
         name: "",
-        type: "address[]",
+        type: "tuple[]",
       },
     ],
     stateMutability: "view",

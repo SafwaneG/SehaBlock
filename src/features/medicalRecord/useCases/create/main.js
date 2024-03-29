@@ -5,7 +5,6 @@ import useCreateUser from "./service";
 
 export default function CreateUser({ open, handleClose }) {
   const { handleSaveButtonClicked } = useCreateUser(handleClose);
-
   return (
     <Modale
       open={open}
@@ -14,6 +13,7 @@ export default function CreateUser({ open, handleClose }) {
         <Detailed
           handleSaveButtonClicked={handleSaveButtonClicked}
           handleClose={handleClose}
+          record={{}}
         />
       }
     />

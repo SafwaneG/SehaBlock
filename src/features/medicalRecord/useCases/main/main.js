@@ -29,6 +29,8 @@ function Main() {
     addDoctorOpen,
     handleAddDoctorClose,
     handleAddDoctorOpen,
+    handleUpdateRecord,
+    user,
   } = useMain();
 
   return (
@@ -48,27 +50,41 @@ function Main() {
             handleDetailsClick={handleDetailsClick}
           />
         </Grid>
-        <Grid
-          item
-          sx={{ position: "absolute", bottom: "-3rem", right: "15.8rem" }}
-        >
-          <Button variant="contained" onClick={handleAddNewUserClick}>
-            Add New Record
-          </Button>
-        </Grid>
-        <Grid
-          item
-          alignSelf={"flex-end"}
-          sx={{ position: "absolute", bottom: "-3rem", right: "4.8rem" }}
-        >
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={handleAddDoctorOpen}
+        {user.userNature === "patient" && (
+          <>
+            <Grid
+              item
+              sx={{ position: "absolute", bottom: "-3rem", right: "15.8rem" }}
+            >
+              <Button variant="contained" onClick={handleAddNewUserClick}>
+                Add New Record
+              </Button>
+            </Grid>
+            <Grid
+              item
+              alignSelf={"flex-end"}
+              sx={{ position: "absolute", bottom: "-3rem", right: "4.8rem" }}
+            >
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={handleAddDoctorOpen}
+              >
+                Authorise a Doctor
+              </Button>
+            </Grid>
+          </>
+        )}
+        {user?.userNature === "doctor" && (
+          <Grid
+            item
+            sx={{ position: "absolute", bottom: "-3rem", right: "4.8rem" }}
           >
-            Authorise a Doctor
-          </Button>
-        </Grid>
+            <Button variant="contained" onClick={handleUpdateRecord}>
+              Update Record
+            </Button>
+          </Grid>
+        )}
         <Grid item>
           <CreateUser open={createOpen} handleClose={handleCreateClose} />
         </Grid>
@@ -81,6 +97,9 @@ function Main() {
         </Grid>
         <Grid item>
           <AddDoctor open={addDoctorOpen} handleClose={handleAddDoctorClose} />
+        </Grid>
+        <Grid item>
+          <EditUser open={editOpen} handleClose={handleEditClose} />
         </Grid>
       </Grid>
     </Container>

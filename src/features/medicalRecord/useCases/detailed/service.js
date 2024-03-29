@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import authSelectors from "features/auth/selectors";
 import helpers from "helpers";
 
-function useDetailed() {
+function useDetailed(record) {
   const user = useSelector((state) => authSelectors.user(state));
   const userNature = user?.userNature;
 
@@ -15,7 +15,7 @@ function useDetailed() {
     diagnostic: "",
     medicalObservation: "",
     diagnosticResult: "",
-    treatement: "",
+    treatment: "",
   });
 
   const [userFirstNameFilledError, setUserFirstNameFilledError] =
@@ -56,8 +56,20 @@ function useDetailed() {
       setTreatmentFilledError(e.target.value === "");
     }
   };
+  const newRecord = {
+    firstName: record?.Fname === undefined ? formData.firstName : record?.Fname,
+    lastName: record?.Lname === undefined ? formData.lastName : record?.Lname,
+    age: record?.age === undefined ? formData.age : record?.age,
+    consultationDate: formData.consultationDate,
+    diagnostic: formData.diagnostic,
+    medicalObservation: formData.medicalObservation,
+    diagnosticResult: formData.diagnosticResult,
+    treatment: formData.treatment,
+  };
+
   return {
     formData,
+    newRecord,
     handleChange,
     handleBlur,
     userFirstNameFilledError,

@@ -1,33 +1,16 @@
-import { useDispatch } from "react-redux";
-import actions from "features/usersManagement/actions";
+import { useDispatch, useSelector } from "react-redux";
+import actions from "features/medicalRecord/actions";
 import errorActions from "store/errors/actions";
-function useEditUser(handleClose) {
+import selectors from "features/medicalRecord/selectors";
+function useEditRecord(handleClose) {
   const dispatch = useDispatch();
-  const handleSaveButtonClickedEdit = (user, validation) => {
-    if (!validation?.isValidEmail) {
-      dispatch(
-        errorActions.updated({
-          isSuccess: false,
-          message: " Email invalide",
-          show: true,
-        })
-      );
-      return;
-    }
-    if (!validation?.isValidPhone) {
-      dispatch(
-        errorActions.updated({
-          isSuccess: false,
-          message: " Numéro de téléphone invalide",
-          show: true,
-        })
-      );
-      return;
-    }
-    dispatch(actions.update({ changes: user }));
+  const record = useSelector((state) => selectors.detailedSelected(state));
+
+  const handleSaveButtonClickedEdit = (record) => {
+    dispatch(actions.update({ changes: record }));
     handleClose();
   };
-  return { handleSaveButtonClickedEdit };
+  return { handleSaveButtonClickedEdit, record };
 }
 
-export default useEditUser;
+export default useEditRecord;

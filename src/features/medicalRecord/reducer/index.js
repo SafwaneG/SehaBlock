@@ -19,14 +19,14 @@ const reducer = (state = getInitialState(), action) => {
           });
         break;
 
-      // case types.updated:
-      //   if (
-      //     helpers.validator.isObject(payload?.user) &&
-      //     !helpers.validator.isEmptyObject(payload?.user) &&
-      //     !helpers.validator.isEmptyString(payload?.user?.id)
-      //   )
-      //     draft.users[payload.user.id] = payload.user;
-      //   break;
+      case types.updated:
+        if (
+          helpers.validator.isObject(payload?.record) &&
+          !helpers.validator.isEmptyObject(payload?.record) &&
+          !helpers.validator.isEmptyString(payload?.record?.recordId)
+        )
+          draft.records[payload.record.recordId - 1] = payload.record;
+        break;
 
       case types.selectedSet:
         draft.selected = payload?.id;

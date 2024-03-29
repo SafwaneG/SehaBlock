@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import useDetailed from "./service";
-function Detailed({ handleSaveButtonClicked, handleClose }) {
+function Detailed({ handleSaveButtonClicked, handleClose, record }) {
   const {
     formData,
     handleChange,
@@ -25,20 +25,22 @@ function Detailed({ handleSaveButtonClicked, handleClose }) {
     diagnosticResultFilledError,
     treatmentFilledError,
     userNature,
-  } = useDetailed();
+    newRecord,
+  } = useDetailed(record);
 
   return (
     <Container>
       <Grid container justifyContent={"center"} sx={{ mt: 1 }} spacing={2}>
         <Grid item xs={12} sm={4}>
           <TextField
+            disabled={userNature === "doctor"}
             required
             fullWidth
             name="firstName"
             label="First Name"
             id="firstName"
             variant="outlined"
-            value={formData.firstName}
+            value={record.Fname != "" ? record.Fname : formData.firstName}
             onChange={handleChange}
             onBlur={handleBlur}
             error={userFirstNameFilledError}
@@ -47,13 +49,14 @@ function Detailed({ handleSaveButtonClicked, handleClose }) {
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
+            disabled={userNature === "doctor"}
             required
             fullWidth
             name="lastName"
             label="Last Name"
             id="lastName"
             variant="outlined"
-            value={formData.lastName}
+            value={record.Fname != "" ? record.Lname : formData.lastName}
             onChange={handleChange}
             onBlur={handleBlur}
             error={userLastNameFilledError}
@@ -63,12 +66,13 @@ function Detailed({ handleSaveButtonClicked, handleClose }) {
         <Grid item xs={12} sm={4}>
           <TextField
             required
+            disabled={userNature === "doctor"}
             fullWidth
             name="age"
             label="Age"
             id="age"
             variant="outlined"
-            value={formData.age}
+            value={record.age != "" ? record.age : formData.age}
             onChange={handleChange}
             onBlur={handleBlur}
             error={userAgeFilledError}
@@ -77,7 +81,6 @@ function Detailed({ handleSaveButtonClicked, handleClose }) {
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
-            sx={{ backgroundColor: "#eeeeee", borderRadius: 1 }}
             disabled={userNature === "patient"}
             required
             fullWidth
@@ -97,7 +100,6 @@ function Detailed({ handleSaveButtonClicked, handleClose }) {
 
         <Grid item xs={12} sm={4}>
           <TextField
-            sx={{ backgroundColor: "#eeeeee", borderRadius: 1 }}
             disabled={userNature === "patient"}
             required
             fullWidth
@@ -105,7 +107,7 @@ function Detailed({ handleSaveButtonClicked, handleClose }) {
             label=" Diagnostic"
             id="diagnostic"
             variant="outlined"
-            value={formData.consultationDate}
+            value={formData.diagnostic}
             onChange={handleChange}
             onBlur={handleBlur}
             error={diagnosticFilledError}
@@ -114,7 +116,6 @@ function Detailed({ handleSaveButtonClicked, handleClose }) {
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
-            sx={{ backgroundColor: "#eeeeee", borderRadius: 1 }}
             disabled={userNature === "patient"}
             required
             fullWidth
@@ -122,7 +123,7 @@ function Detailed({ handleSaveButtonClicked, handleClose }) {
             label=" Observation Medicale"
             id=" medicalObservation"
             variant="outlined"
-            value={formData.consultationDate}
+            value={formData.medicalObservation}
             onChange={handleChange}
             onBlur={handleBlur}
             error={medicalObervationFilledError}
@@ -133,7 +134,6 @@ function Detailed({ handleSaveButtonClicked, handleClose }) {
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
-            sx={{ backgroundColor: "#eeeeee", borderRadius: 1 }}
             required
             disabled={userNature === "patient"}
             fullWidth
@@ -141,7 +141,7 @@ function Detailed({ handleSaveButtonClicked, handleClose }) {
             label=" Resultat de diagnostic"
             id=" diagnosticResult"
             variant="outlined"
-            value={formData.consultationDate}
+            value={formData.diagnosticResult}
             onChange={handleChange}
             onBlur={handleBlur}
             error={diagnosticResultFilledError}
@@ -152,15 +152,14 @@ function Detailed({ handleSaveButtonClicked, handleClose }) {
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
-            sx={{ backgroundColor: "#eeeeee", borderRadius: 1 }}
             disabled={userNature === "patient"}
             required
             fullWidth
-            name="treatment "
+            name="treatment"
             label=" Treatment "
             id="treatment "
             variant="outlined"
-            value={formData.consultationDate}
+            value={formData.treatement}
             onChange={handleChange}
             onBlur={handleBlur}
             error={treatmentFilledError}
@@ -173,7 +172,7 @@ function Detailed({ handleSaveButtonClicked, handleClose }) {
             <Button
               sx={{ mr: 2 }}
               variant="contained"
-              onClick={() => handleSaveButtonClicked(formData)}
+              onClick={() => handleSaveButtonClicked(newRecord)}
             >
               Enregistrer
             </Button>

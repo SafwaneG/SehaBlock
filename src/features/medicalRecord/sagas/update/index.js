@@ -1,8 +1,8 @@
 import { takeLatest } from "redux-saga/effects";
-import actionsTypes from "features/usersManagement/actionsTypes";
+import actionsTypes from "features/medicalRecord/actionsTypes";
 import worker from "./worker";
-function* updateRole() {
+function* updateRecord() {
   yield takeLatest(actionsTypes.update, worker);
 }
 
-export default updateRole;
+export default updateRecord;
