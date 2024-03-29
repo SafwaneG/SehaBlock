@@ -6,5 +6,6 @@ export default function* rootSaga() {
   yield all([
     features.medicalRecord.sagas(),
     features.authorisedDoctors.sagas(),
+    features.patients.sagas(),
   ]);
 }

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import actions from "features/medicalRecord/actions";
-
+import authSelectors from "features/auth/selectors";
 import selectors from "features/medicalRecord/selectors";
 function useMain() {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ function useMain() {
     dispatch(actions.get());
   }, []);
   const records = useSelector((state) => selectors.all(state));
-  console.log(records, "dd");
+  const user = useSelector((state) => authSelectors.user(state));
 
   const [createOpen, setCreateOpen] = React.useState(false);
   const [editOpen, setEditOpen] = React.useState(false);
@@ -50,6 +50,12 @@ function useMain() {
   const handleAddDoctorOpen = () => setAddDoctorOpen(true);
   const handleAddDoctorClose = () => setAddDoctorOpen(false);
 
+  const handleUpdateRecord = () => {
+    const recordsKeys = Object.keys(records);
+    dispatch(actions.selectedSet({ id: recordsKeys[recordsKeys.length - 1] }));
+    handleEditClick();
+  };
+
   return {
     createOpen,
     handleCreateClose,
@@ -68,6 +74,8 @@ function useMain() {
     addDoctorOpen,
     handleAddDoctorClose,
     handleAddDoctorOpen,
+    user,
+    handleUpdateRecord,
   };
 }
 

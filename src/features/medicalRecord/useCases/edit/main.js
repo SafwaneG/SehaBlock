@@ -1,10 +1,10 @@
 import * as React from "react";
 import Detailed from "../detailed";
 import Modale from "../../../../components/modal/index";
-import useEditUser from "./service";
+import useEditRecord from "./service";
 
-export default function EditUser({ open, handleClose, user }) {
-  const { handleSaveButtonClickedEdit } = useEditUser(handleClose);
+export default function EditUser({ open, handleClose }) {
+  const { handleSaveButtonClickedEdit, record } = useEditRecord(handleClose);
 
   return (
     <Modale
@@ -14,7 +14,7 @@ export default function EditUser({ open, handleClose, user }) {
         <Detailed
           handleClose={handleClose}
           handleSaveButtonClicked={handleSaveButtonClickedEdit}
-          user={user}
+          record={record}
         />
       }
     />
