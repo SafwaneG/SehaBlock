@@ -8,5 +8,6 @@ export default function* rootSaga() {
     features.authorisedDoctors.sagas(),
     features.patients.sagas(),
     features.prescription.sagas(),
+    features.pharmacy.sagas(),
   ]);
 }

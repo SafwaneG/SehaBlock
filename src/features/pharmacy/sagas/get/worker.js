@@ -7,7 +7,6 @@ import actions from "features/prescription/actions";
 import errorsActions from "store/errors/actions";
 import authSelectors from "features/auth/selectors";
 import patientSelectors from "features/patients/selectors";
-import loadingActions from "store/loading/actions";
 function* getWorker({ meta = {}, payload }) {
   const patient = yield select(patientSelectors.detailedSelected);
   // const user = yield select(authSelectors.user);
@@ -22,7 +21,6 @@ function* getWorker({ meta = {}, payload }) {
   const contract = new web3.eth.Contract(abi, contractAddress.address);
 
   let result;
-  yield put(loadingActions.updated({ value: true }));
   if (user?.userNature === "doctor") {
     result = yield contract.methods
       .getPrescriptionDetails(patient?.doctorAddress)
@@ -32,19 +30,11 @@ function* getWorker({ meta = {}, payload }) {
       .getPrescriptionDetails(account)
       .call({ from: account });
   } else {
-    console.log(payload?.address, "payload?.address");
     result = yield contract.methods
       .getPrescriptionDetails(payload?.address)
       .call({ from: account });
-
-    result = result.filter(
-      (prescription) =>
-        prescription?.signedByPatient === true &&
-        prescription?.destroyPrescription === true
-    );
   }
-
-  yield put(loadingActions.updated({ value: false }));
+  console.log(result);
 
   const prescriptions = result.map((prescription) =>
     JSON.stringify(prescription, (key, value) => {
@@ -70,15 +60,7 @@ function* getWorker({ meta = {}, payload }) {
       doctorName: doctorDetails[1],
     };
   }
-  if (medicalPrescription.length == 0) {
-    yield put(
-      errorsActions.updated({
-        isSuccess: false,
-        message: "No prescription found for this patient",
-        show: true,
-      })
-    );
-  }
+  console.log(medicalPrescription);
   yield put(
     actions.merged({
       prescriptions: [...medicalPrescription],
