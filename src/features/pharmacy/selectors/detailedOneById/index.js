@@ -3,17 +3,18 @@ import selectAll from "../all";
 import helpers from "helpers";
 
 const detailedOneById = memoize(({ state, id }) => {
-  const records = selectAll(state);
+  const prescriptions = selectAll(state);
+  console.log(prescriptions, "prescriptions selec");
 
-  const record = records[id];
+  const prescription = prescriptions[id];
 
   if (
-    !helpers.validator.isObject(record) ||
-    helpers.validator.isEmptyObject(record)
+    !helpers.validator.isObject(prescription) ||
+    helpers.validator.isEmptyObject(prescription)
   )
     return null;
 
-  return record;
+  return prescription;
 });
 
 export default detailedOneById;

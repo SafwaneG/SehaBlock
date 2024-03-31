@@ -40,7 +40,7 @@ function* getWorker({ meta = {}, payload }) {
     result = result.filter(
       (prescription) =>
         prescription?.signedByPatient === true &&
-        prescription?.destroyPrescription === true
+        prescription?.destroyPrescreption === false
     );
   }
 

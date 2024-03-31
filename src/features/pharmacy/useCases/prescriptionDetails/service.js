@@ -4,9 +4,7 @@ function useDetailsUser() {
   const selectedPrescreption = useSelector((state) =>
     selectors.detailedSelected(state)
   );
-  const handleSignByPharmacy = (medication) => {
-    console.log(medication, "medication");
-  };
+
   return { selectedPrescreption };
 }
 

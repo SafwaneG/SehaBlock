@@ -42,8 +42,9 @@ function useMain() {
 
   const handleDetailsOpen = () => setDetailsOpen(true);
   const handleDetailsClose = () => setDetailsOpen(false);
-  const handleDetailsClick = (id) => {
-    dispatch(actions.selectedSet({ id }));
+  const handleDetailsClick = (prescription) => {
+    console.log(prescription, "prescription");
+    dispatch(actions.selectedSet({ id: prescription.id }));
     handleDetailsOpen();
   };
 

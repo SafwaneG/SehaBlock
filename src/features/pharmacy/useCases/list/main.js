@@ -79,7 +79,9 @@ export default function UserTable({
                             variant="outlined"
                             size="small"
                             sx={{ mr: 2 }}
-                            onClick={() => handleDetailsClick(row)}
+                            onClick={() =>
+                              handleDetailsClick(prescriptions[row])
+                            }
                           >
                             Details
                           </Button>

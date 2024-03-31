@@ -10,11 +10,13 @@ function* signMedication({ payload, meta = {} }) {
   yield put(errorsActions.cleaned());
   const prescriptions = yield select(selectors.all);
   const selectedPrescription = yield select(selectors.detailedSelected);
-
+  console.log("pp", payload);
   const newPrescriptions = Object.values(prescriptions).map((prescription) => {
     if (prescription.id == payload.idPrescription) {
+      console.log("pres");
       const medications = prescription.medications.map((medication) => {
         if (medication.medicationId == payload.idMedication) {
+          console.log("med");
           return { ...medication, signedbyPharmacie: true };
         }
         return medication;
