@@ -4,6 +4,7 @@ import medicalRecord from "./medicalRecord";
 import authorisedDoctors from "./authorisedDoctors";
 import patients from "./patients";
 import prescription from "./prescription";
+import pharmacy from "./pharmacy";
 
 export default Object.freeze({
   auth,
@@ -11,5 +12,6 @@ export default Object.freeze({
   medicalRecord,
   authorisedDoctors,
   patients,
-  prescription
+  prescription,
+  pharmacy,
 });

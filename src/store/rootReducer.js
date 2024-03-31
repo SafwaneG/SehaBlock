@@ -13,6 +13,7 @@ const rootReducer = combineReducers({
   authorisedDoctors: features.authorisedDoctors.reducer,
   patients: features.patients.reducer,
   prescription: features.prescription.reducer,
+  pharmacyPrescriptions: features.pharmacy.reducer,
 });
 
 export default rootReducer;
