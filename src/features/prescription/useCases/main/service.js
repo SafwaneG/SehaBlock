@@ -1,24 +1,21 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import actions from "features/patients/actions";
-
-import selectors from "features/patients/selectors";
+import actions from "features/prescription/actions";
+import authSelectors from "features/auth/selectors";
+import selectors from "features/prescription/selectors";
 function useMain() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(actions.get());
   }, []);
-  const patients = useSelector((state) => selectors.all(state));
-  console.log(patients, "dd");
+  const records = useSelector((state) => selectors.all(state));
+  const user = useSelector((state) => authSelectors.user(state));
 
   const [createOpen, setCreateOpen] = React.useState(false);
   const [editOpen, setEditOpen] = React.useState(false);
   const [removeOpen, setRemoveOpen] = React.useState(false);
   const [detailsOpen, setDetailsOpen] = React.useState(false);
-  const [addDoctorOpen, setAddDoctorOpen] = React.useState(false);
   const handleCreateOpen = () => setCreateOpen(true);
   const handleCreateClose = () => {
     setCreateOpen(false);
@@ -38,7 +35,7 @@ function useMain() {
   const handleRemoveOpen = () => setRemoveOpen(true);
   const handleRemoveClose = () => setRemoveOpen(false);
   const handleRemoveClick = (id) => {
-    dispatch(actions.selectedSet({ id }));
+    // dispatch(actions.selectedSet({ id }));
     handleRemoveOpen();
   };
 
@@ -49,16 +46,13 @@ function useMain() {
     handleDetailsOpen();
   };
 
-  const handleAddDoctorOpen = () => setAddDoctorOpen(true);
-  const handleAddDoctorClose = () => setAddDoctorOpen(false);
-
-  const handleMedicalRecordClick = (id) => {
-    navigate("/dashboard/medicalRecord");
+  const handleSignPrescriptionClick = (id) => {
     dispatch(actions.selectedSet({ id }));
+    handleRemoveOpen();
   };
-  const handlePrescriptionsClick = (id) => {
-    navigate("/dashboard/prescriptions");
-    dispatch(actions.selectedSet({ id }));
+
+  const handleCreatePrescription = () => {
+    handleCreateOpen();
   };
 
   return {
@@ -75,12 +69,10 @@ function useMain() {
     detailsOpen,
     handleDetailsClose,
     handleDetailsClick,
-    patients,
-    addDoctorOpen,
-    handleAddDoctorClose,
-    handleAddDoctorOpen,
-    handleMedicalRecordClick,
-    handlePrescriptionsClick,
+    records,
+    user,
+    handleCreatePrescription,
+    handleSignPrescriptionClick,
   };
 }
 

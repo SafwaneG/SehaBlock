@@ -15,6 +15,7 @@ function Main() {
     handleDetailsClick,
     handleDetailsClose,
     handleMedicalRecordClick,
+    handlePrescriptionsClick,
   } = useMain();
 
   return (
@@ -33,6 +34,7 @@ function Main() {
             handleRemoveClick={handleRemoveClick}
             handleDetailsClick={handleDetailsClick}
             handleMedicalRecordClick={handleMedicalRecordClick}
+            handlePrescriptionsClick={handlePrescriptionsClick}
           />
         </Grid>
         <Grid item>

@@ -4,15 +4,15 @@ export const abi = [
     inputs: [
       {
         indexed: false,
-        internalType: "address",
-        name: "patient",
-        type: "address",
+        internalType: "bool",
+        name: "isCreated",
+        type: "bool",
       },
       {
         indexed: false,
-        internalType: "address",
-        name: "doctor",
-        type: "address",
+        internalType: "string",
+        name: "msg",
+        type: "string",
       },
     ],
     name: "PrescriptionCreated",
@@ -92,6 +92,31 @@ export const abi = [
       },
     ],
     name: "authorisedDoctorevent",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isSignedByPatient",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isSignedByPhramacy",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "msg",
+        type: "string",
+      },
+    ],
+    name: "prescriptionSigned",
     type: "event",
   },
   {
@@ -506,6 +531,30 @@ export const abi = [
     inputs: [
       {
         internalType: "address",
+        name: "_userAddress",
+        type: "address",
+      },
+    ],
+    name: "getUserInfo",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
         name: "addressuser",
         type: "address",
       },
@@ -724,24 +773,6 @@ export const abi = [
       },
     ],
     name: "removeDoctor",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "patient",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "prescriptionIndex",
-        type: "uint256",
-      },
-    ],
-    name: "signByDoctor",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

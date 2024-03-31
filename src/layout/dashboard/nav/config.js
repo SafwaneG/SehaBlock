@@ -38,7 +38,7 @@ const navConfig = [
   {
     usersAuth: ["patient", "doctor"],
     title: "Prescriptions",
-    path: "/dashboard/taskList",
+    path: "/dashboard/prescriptions",
     icon: icon("prescription"),
     expand: false,
     divider: true,

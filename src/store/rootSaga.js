@@ -7,5 +7,6 @@ export default function* rootSaga() {
     features.medicalRecord.sagas(),
     features.authorisedDoctors.sagas(),
     features.patients.sagas(),
+    features.prescription.sagas(),
   ]);
 }
