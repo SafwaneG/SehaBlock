@@ -14,14 +14,14 @@ export default function UserTable({
   handleEditClick,
   handleRemoveClick,
   handleDetailsClick,
-  handleMedicalRecordClick,
-  handlePrescriptionsClick,
+  handleSignPrescriptionClick,
 }) {
-  const { patientsIds, patients } = useUserTable();
-  const rows = patientsIds;
+  const { prescriptionIds, prescriptions, userNature } = useUserTable();
+  const rows = prescriptionIds;
   const columns = [
-    { id: "doctorAddress", Label: "Patient's Address" },
-    { id: "name", Label: "Full Name" },
+    { id: "id", Label: "Prescrption Number" },
+    { id: "doctorName", Label: "Doctor's Name" },
+    { id: "patientName", Label: "Patient's Name" },
     { id: "actions", Label: "" },
   ];
 
@@ -72,26 +72,28 @@ export default function UserTable({
                   {columns.map((column) => {
                     const value =
                       column.id !== "actions" ? (
-                        patients[row][column.id]
+                        prescriptions[row][column.id]
                       ) : (
                         <>
+                          {userNature === "patient" &&
+                            !prescriptions[row].signedByPatient && (
+                              <Button
+                                variant="outlined"
+                                size="small"
+                                color="error"
+                                sx={{ mr: 2 }}
+                                onClick={() => handleSignPrescriptionClick(row)}
+                              >
+                                Sign Prescription
+                              </Button>
+                            )}
                           <Button
                             variant="outlined"
-                            color="primary"
                             size="small"
                             sx={{ mr: 2 }}
-                            onClick={() => handleMedicalRecordClick(row)}
+                            onClick={() => handleDetailsClick(row)}
                           >
-                            Medical Record
-                          </Button>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            size="small"
-                            sx={{ mr: 2 }}
-                            onClick={() => handlePrescriptionsClick(row)}
-                          >
-                            Prescriptions
+                            Details
                           </Button>
                         </>
                       );

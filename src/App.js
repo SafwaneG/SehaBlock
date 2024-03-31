@@ -43,6 +43,14 @@ const router = createBrowserRouter(
             // </ProtectedRole>
           }
         />
+        <Route
+          path="prescriptions"
+          element={
+            // <ProtectedRole roles={["patient"]}>
+            <features.prescription.useCases.Main />
+            // </ProtectedRole>
+          }
+        />
       </Route>
     </>
   )
