@@ -1,7 +1,7 @@
 {
+  "homepage": "http://SafwaneG.github.io/healthCare_blockChain",
   "name": "frontend",
   "version": "0.1.0",
-  "homepage": "http://31.220.54.106",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -44,6 +44,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -71,6 +73,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^6.1.1",
     "miragejs": "^0.1.47",
     "redux-devtools-extension": "^2.13.9"
   }
