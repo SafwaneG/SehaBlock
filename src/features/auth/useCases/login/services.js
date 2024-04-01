@@ -73,6 +73,12 @@ export default function useLogin() {
 
   const contract = new web3.eth.Contract(abi, contractAddress.address);
 
+  const navigateUser = (userNature) => {
+    if (userNature === "patient") navigate("/dashboard/medicalRecord");
+    else if (userNature === "doctor") navigate("/dashboard/patients");
+    else if (userNature === "pharmacy") navigate("/dashboard/pharmacy");
+  };
+
   const onSubmit = async () => {
     dispatch(loadingActions.updated({ value: true }));
     const result = await contract.methods
@@ -83,7 +89,7 @@ export default function useLogin() {
     if (result.Login) {
       dispatch(authActions.userSet({ user: result }));
       helpers.persister.set({ key: "user", value: JSON.stringify(result) });
-      navigate("/dashboard");
+      navigateUser(result.userNature);
     } else {
       dispatch(
         actions.updated({

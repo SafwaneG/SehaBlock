@@ -9,6 +9,8 @@ import Iconify from "components/iconify/Iconify";
 //
 import AccountPopover from "./AccountPopover";
 import NotificationsPopover from "./notificationPopover/NotificationsPopover";
+import selectors from "features/auth/selectors";
+import { useSelector } from "react-redux";
 
 // ----------------------------------------------------------------------
 
@@ -45,22 +47,25 @@ Header.propTypes = {
 };
 
 export default function Header({ onOpenNav }) {
+  const user = useSelector((state) => selectors.user(state));
   return (
     <StyledRoot>
       <StyledToolbar>
-        <IconButton
-          onClick={onOpenNav}
-          sx={{
-            mr: 1,
-            color: "text.primary",
-            position: "fixed",
-            top: 0,
+        {user.userNature != "pharmacy" && (
+          <IconButton
+            onClick={onOpenNav}
+            sx={{
+              mr: 1,
+              color: "text.primary",
+              position: "fixed",
+              top: 0,
 
-            // display: { lg: 'none' },
-          }}
-        >
-          <Iconify icon="eva:menu-2-fill" width={40} />
-        </IconButton>
+              // display: { lg: 'none' },
+            }}
+          >
+            <Iconify icon="eva:menu-2-fill" width={40} />
+          </IconButton>
+        )}
 
         <Box sx={{ flexGrow: 1 }} />
 
