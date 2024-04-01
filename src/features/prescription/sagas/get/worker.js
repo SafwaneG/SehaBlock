@@ -11,7 +11,6 @@ import loadingActions from "store/loading/actions";
 function* getWorker({ meta = {}, payload }) {
   const patient = yield select(patientSelectors.detailedSelected);
   const user = yield select(authSelectors.user);
-
   const web3 = new Web3(window.ethereum);
   yield put(errorsActions.cleaned());
   const provider = window.ethereum;
