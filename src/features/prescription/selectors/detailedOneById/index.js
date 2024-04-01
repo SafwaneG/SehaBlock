@@ -5,17 +5,17 @@ import helpers from "helpers";
 const detailedOneById = memoize(({ state, id }) => {
   const prescriptions = selectAll(state);
 
-  const prescription = Object.values(prescriptions).reduce(
+  const prescription = Object.values(prescriptions).filter(
     (prescription) => prescription.id === id
   );
   console.log("sle", prescription);
   if (
-    !helpers.validator.isObject(prescription) ||
-    helpers.validator.isEmptyObject(prescription)
+    !helpers.validator.isObject(prescription[0]) ||
+    helpers.validator.isEmptyObject(prescription[0])
   )
     return null;
 
-  return prescription;
+  return prescription[0];
 });
 
 export default detailedOneById;
