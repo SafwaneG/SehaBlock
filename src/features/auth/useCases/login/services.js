@@ -8,6 +8,7 @@ import { abi } from "config/contractAbi";
 import contractAddress from "config/contractAddress";
 import authActions from "features/auth/actions";
 import helpers from "helpers";
+import errorsActions from "store/errors/actions";
 export default function useLogin() {
   const dispatch = useDispatch();
   const [isConnected, setIsConnected] = useState(false);
@@ -20,22 +21,6 @@ export default function useLogin() {
     isError: false,
   });
   const web3 = new Web3(window.ethereum);
-
-  useEffect(() => {
-    async function fetchAddress() {
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      setFormData({ ...formData, publicKey: accounts[0] });
-    }
-    fetchAddress();
-  }, []);
-  const navigate = useNavigate();
-
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   const detectCurrentProvider = () => {
     let provider;
     if (window.ethereum) {
@@ -47,11 +32,42 @@ export default function useLogin() {
     }
     return provider;
   };
+  useEffect(() => {
+    async function fetchAddress() {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      setFormData({ ...formData, publicKey: accounts[0] });
+    }
+    const provider = detectCurrentProvider();
+    if (provider === "You should install MetaMask!") {
+      dispatch(
+        errorsActions.updated({
+          isSuccess: false,
+          message: "You should install MetaMask!",
+          show: true,
+        })
+      );
+    } else {
+      fetchAddress();
+    }
+  }, []);
+  const navigate = useNavigate();
+
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const onConnect = async () => {
     const provider = detectCurrentProvider();
     if (provider === "You should install MetaMask!") {
-      setIsError({ show: true, message: provider, isError: true });
+      dispatch(
+        errorsActions.updated({
+          isSuccess: false,
+          message: "You should install MetaMask!",
+          show: true,
+        })
+      );
       return;
     }
     try {
@@ -62,7 +78,6 @@ export default function useLogin() {
       console.log(web3.eth.Contract);
       test(account);
       setIsConnected(true);
-      // navigate("/dashboard");
     } catch (error) {
       console.error(error);
     }
