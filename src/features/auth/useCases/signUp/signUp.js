@@ -9,7 +9,6 @@ import FormLabel from "@mui/material/FormLabel";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import useSignUp from "./service";
 
-
 export default function SignUpForm(props) {
   const {
     userNature,
@@ -71,6 +70,11 @@ export default function SignUpForm(props) {
               control={<Radio />}
               label="Doctor"
             />
+            <FormControlLabel
+              value="pharmacy"
+              control={<Radio />}
+              label="Pharmacy"
+            />
           </RadioGroup>
         </FormControl>
         {userNature == "doctor" ? (
@@ -90,6 +94,16 @@ export default function SignUpForm(props) {
             fullWidth
             name="identifier"
             label="Insurance Number"
+            id="identifier"
+            onChange={onChange}
+          />
+        ) : userNature == "pharmacy" ? (
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="identifier"
+            label="Patent Number "
             id="identifier"
             onChange={onChange}
           />

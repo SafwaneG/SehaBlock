@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { alpha } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Divider,
@@ -30,6 +31,7 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { photoURL, username, userNature } = useSelector(authSelectors.user);
   const [open, setOpen] = useState(null);
@@ -44,6 +46,7 @@ export default function AccountPopover() {
 
   const handleLogOut = () => {
     dispatch(authActions.logout());
+    navigate("/");
   };
 
   return (
