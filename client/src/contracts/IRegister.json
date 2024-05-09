@@ -1,0 +1,469 @@
+{
+  "contractName": "IRegister",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "ad",
+          "type": "address"
+        }
+      ],
+      "name": "getUsers",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "userAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "hashedPassword",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "string",
+              "name": "userNature",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "IdentifierN",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct IRegister.userData",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "addressExists",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"addressExists\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"ad\",\"type\":\"address\"}],\"name\":\"getUsers\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"userAddress\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"hashedPassword\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"userNature\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"IdentifierN\",\"type\":\"string\"}],\"internalType\":\"struct IRegister.userData\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IRegister.sol\":\"IRegister\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IRegister.sol\":{\"keccak256\":\"0x0ab7b575642ab604c01be408c0e70733d5f59f4ee8362d71c57284ea50a0bd96\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://42c573b75effaaaf95e9c77260f85bc0bc6abcf7b199911b4c336cdce1ea8f6e\",\"dweb:/ipfs/QmT6hSyqQWjeEC9wFyo8HuXorjS2BAHZXs1GuYQHRfAU7d\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "//SPDX-License-Identifier: MIT\npragma solidity ^0.8.21;\n\ninterface IRegister{\n    struct userData {\n        string name;\n        address userAddress;\n        bytes32 hashedPassword; // Utilisation de bytes32 pour stocker le hachage du mot de passe\n        string userNature;\n        string IdentifierN;\n    }\n    function getUsers(address ad) external  view returns(userData memory);\n    function addressExists(address _address) external  view returns (bool) ;\n}\n",
+  "sourcePath": "C:\\Users\\safouane\\Desktop\\healthCare_blockChain\\contracts\\IRegister.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/IRegister.sol",
+    "exportedSymbols": {
+      "IRegister": [
+        68
+      ]
+    },
+    "id": 69,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 41,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".21"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "31:24:1"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IRegister",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 68,
+        "linearizedBaseContracts": [
+          68
+        ],
+        "name": "IRegister",
+        "nameLocation": "67:9:1",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "IRegister.userData",
+            "id": 52,
+            "members": [
+              {
+                "constant": false,
+                "id": 43,
+                "mutability": "mutable",
+                "name": "name",
+                "nameLocation": "115:4:1",
+                "nodeType": "VariableDeclaration",
+                "scope": 52,
+                "src": "108:11:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 42,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "108:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 45,
+                "mutability": "mutable",
+                "name": "userAddress",
+                "nameLocation": "137:11:1",
+                "nodeType": "VariableDeclaration",
+                "scope": 52,
+                "src": "129:19:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 44,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "129:7:1",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 47,
+                "mutability": "mutable",
+                "name": "hashedPassword",
+                "nameLocation": "166:14:1",
+                "nodeType": "VariableDeclaration",
+                "scope": 52,
+                "src": "158:22:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 46,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "158:7:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 49,
+                "mutability": "mutable",
+                "name": "userNature",
+                "nameLocation": "263:10:1",
+                "nodeType": "VariableDeclaration",
+                "scope": 52,
+                "src": "256:17:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 48,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "256:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 51,
+                "mutability": "mutable",
+                "name": "IdentifierN",
+                "nameLocation": "290:11:1",
+                "nodeType": "VariableDeclaration",
+                "scope": 52,
+                "src": "283:18:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 50,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "283:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "userData",
+            "nameLocation": "89:8:1",
+            "nodeType": "StructDefinition",
+            "scope": 68,
+            "src": "82:226:1",
+            "visibility": "public"
+          },
+          {
+            "functionSelector": "602b386e",
+            "id": 60,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getUsers",
+            "nameLocation": "322:8:1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 55,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 54,
+                  "mutability": "mutable",
+                  "name": "ad",
+                  "nameLocation": "339:2:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 60,
+                  "src": "331:10:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 53,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "331:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "330:12:1"
+            },
+            "returnParameters": {
+              "id": 59,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 58,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 60,
+                  "src": "366:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_userData_$52_memory_ptr",
+                    "typeString": "struct IRegister.userData"
+                  },
+                  "typeName": {
+                    "id": 57,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 56,
+                      "name": "userData",
+                      "nameLocations": [
+                        "366:8:1"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 52,
+                      "src": "366:8:1"
+                    },
+                    "referencedDeclaration": 52,
+                    "src": "366:8:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_userData_$52_storage_ptr",
+                      "typeString": "struct IRegister.userData"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "365:17:1"
+            },
+            "scope": 68,
+            "src": "313:70:1",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "a5025222",
+            "id": 67,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addressExists",
+            "nameLocation": "397:13:1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 63,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 62,
+                  "mutability": "mutable",
+                  "name": "_address",
+                  "nameLocation": "419:8:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 67,
+                  "src": "411:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 61,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "411:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "410:18:1"
+            },
+            "returnParameters": {
+              "id": 66,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 65,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 67,
+                  "src": "453:4:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 64,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "453:4:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "452:6:1"
+            },
+            "scope": 68,
+            "src": "388:72:1",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 69,
+        "src": "57:405:1",
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "src": "31:432:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.21+commit.d9974bed.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2024-05-09T19:38:26.122Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

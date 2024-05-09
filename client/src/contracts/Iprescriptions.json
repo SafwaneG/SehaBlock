@@ -1,0 +1,633 @@
+{
+  "contractName": "Iprescriptions",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "patient",
+          "type": "address"
+        }
+      ],
+      "name": "getPrescriptionDetails",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "doctor",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "patient",
+              "type": "address"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "medicationId",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "medicationName",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "quantity",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "dosage",
+                  "type": "string"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "signedbyPharmacie",
+                  "type": "bool"
+                }
+              ],
+              "internalType": "struct Iprescriptions.MedicationObj[]",
+              "name": "medications",
+              "type": "tuple[]"
+            },
+            {
+              "internalType": "bool",
+              "name": "signedByDoctor",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "signedByPatient",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "destroyPrescreption",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct Iprescriptions.Prescription[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"patient\",\"type\":\"address\"}],\"name\":\"getPrescriptionDetails\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"doctor\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"patient\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"medicationId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"medicationName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"quantity\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"dosage\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"signedbyPharmacie\",\"type\":\"bool\"}],\"internalType\":\"struct Iprescriptions.MedicationObj[]\",\"name\":\"medications\",\"type\":\"tuple[]\"},{\"internalType\":\"bool\",\"name\":\"signedByDoctor\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"signedByPatient\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"destroyPrescreption\",\"type\":\"bool\"}],\"internalType\":\"struct Iprescriptions.Prescription[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IPrescription.sol\":\"Iprescriptions\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IPrescription.sol\":{\"keccak256\":\"0x80c73dfdbb90993a6a9cfe2c9d88440b268bfdff4a4acbcb15fbc615ce44235c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1b268e13fbfd82476fc057b9838b7e06ffd8cc8fe5cc94afe61dbd68cea2b832\",\"dweb:/ipfs/QmYpBmd34EAhJ2DXUxfYNtEKtmA82yfviHFYKGMfxiKkgy\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\ninterface Iprescriptions{\r\n    struct MedicationObj {\r\n        uint256 medicationId;\r\n        string medicationName;\r\n        string quantity;\r\n        string dosage;\r\n        bool signedbyPharmacie;\r\n    }\r\n     struct Prescription {\r\n        uint256 id;\r\n        address doctor;\r\n        address patient;\r\n        MedicationObj[] medications; \r\n        bool signedByDoctor;\r\n        bool signedByPatient;\r\n        bool destroyPrescreption ;    \r\n    }\r\n   function getPrescriptionDetails(address patient) external view returns (Prescription[] memory) ;\r\n\r\n}",
+  "sourcePath": "C:\\Users\\safouane\\Desktop\\healthCare_blockChain\\contracts\\IPrescription.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/IPrescription.sol",
+    "exportedSymbols": {
+      "Iprescriptions": [
+        39
+      ]
+    },
+    "id": 40,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:0"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Iprescriptions",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 39,
+        "linearizedBaseContracts": [
+          39
+        ],
+        "name": "Iprescriptions",
+        "nameLocation": "68:14:0",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Iprescriptions.MedicationObj",
+            "id": 12,
+            "members": [
+              {
+                "constant": false,
+                "id": 3,
+                "mutability": "mutable",
+                "name": "medicationId",
+                "nameLocation": "129:12:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 12,
+                "src": "121:20:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "121:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 5,
+                "mutability": "mutable",
+                "name": "medicationName",
+                "nameLocation": "159:14:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 12,
+                "src": "152:21:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 4,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "152:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 7,
+                "mutability": "mutable",
+                "name": "quantity",
+                "nameLocation": "191:8:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 12,
+                "src": "184:15:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 6,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "184:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 9,
+                "mutability": "mutable",
+                "name": "dosage",
+                "nameLocation": "217:6:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 12,
+                "src": "210:13:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 8,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "210:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 11,
+                "mutability": "mutable",
+                "name": "signedbyPharmacie",
+                "nameLocation": "239:17:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 12,
+                "src": "234:22:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 10,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "234:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "MedicationObj",
+            "nameLocation": "96:13:0",
+            "nodeType": "StructDefinition",
+            "scope": 39,
+            "src": "89:175:0",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Iprescriptions.Prescription",
+            "id": 29,
+            "members": [
+              {
+                "constant": false,
+                "id": 14,
+                "mutability": "mutable",
+                "name": "id",
+                "nameLocation": "310:2:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 29,
+                "src": "302:10:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 13,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "302:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 16,
+                "mutability": "mutable",
+                "name": "doctor",
+                "nameLocation": "331:6:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 29,
+                "src": "323:14:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 15,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "323:7:0",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 18,
+                "mutability": "mutable",
+                "name": "patient",
+                "nameLocation": "356:7:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 29,
+                "src": "348:15:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 17,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "348:7:0",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 22,
+                "mutability": "mutable",
+                "name": "medications",
+                "nameLocation": "390:11:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 29,
+                "src": "374:27:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_MedicationObj_$12_storage_$dyn_storage_ptr",
+                  "typeString": "struct Iprescriptions.MedicationObj[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 20,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 19,
+                      "name": "MedicationObj",
+                      "nameLocations": [
+                        "374:13:0"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 12,
+                      "src": "374:13:0"
+                    },
+                    "referencedDeclaration": 12,
+                    "src": "374:13:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_MedicationObj_$12_storage_ptr",
+                      "typeString": "struct Iprescriptions.MedicationObj"
+                    }
+                  },
+                  "id": 21,
+                  "nodeType": "ArrayTypeName",
+                  "src": "374:15:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_MedicationObj_$12_storage_$dyn_storage_ptr",
+                    "typeString": "struct Iprescriptions.MedicationObj[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 24,
+                "mutability": "mutable",
+                "name": "signedByDoctor",
+                "nameLocation": "418:14:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 29,
+                "src": "413:19:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 23,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "413:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26,
+                "mutability": "mutable",
+                "name": "signedByPatient",
+                "nameLocation": "448:15:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 29,
+                "src": "443:20:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 25,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "443:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 28,
+                "mutability": "mutable",
+                "name": "destroyPrescreption",
+                "nameLocation": "479:19:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 29,
+                "src": "474:24:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 27,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "474:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Prescription",
+            "nameLocation": "278:12:0",
+            "nodeType": "StructDefinition",
+            "scope": 39,
+            "src": "271:240:0",
+            "visibility": "public"
+          },
+          {
+            "functionSelector": "c9d39c46",
+            "id": 38,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPrescriptionDetails",
+            "nameLocation": "525:22:0",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 32,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 31,
+                  "mutability": "mutable",
+                  "name": "patient",
+                  "nameLocation": "556:7:0",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38,
+                  "src": "548:15:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 30,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "548:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "547:17:0"
+            },
+            "returnParameters": {
+              "id": 37,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 36,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38,
+                  "src": "588:21:0",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_Prescription_$29_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct Iprescriptions.Prescription[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 34,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 33,
+                        "name": "Prescription",
+                        "nameLocations": [
+                          "588:12:0"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 29,
+                        "src": "588:12:0"
+                      },
+                      "referencedDeclaration": 29,
+                      "src": "588:12:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Prescription_$29_storage_ptr",
+                        "typeString": "struct Iprescriptions.Prescription"
+                      }
+                    },
+                    "id": 35,
+                    "nodeType": "ArrayTypeName",
+                    "src": "588:14:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_Prescription_$29_storage_$dyn_storage_ptr",
+                      "typeString": "struct Iprescriptions.Prescription[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "587:23:0"
+            },
+            "scope": 39,
+            "src": "516:96:0",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 40,
+        "src": "58:559:0",
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "src": "33:584:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.21+commit.d9974bed.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2024-05-09T19:38:26.118Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
