@@ -10,7 +10,7 @@ export default function useSignUp() {
 
   const contract = new web3.eth.Contract(
     Register.abi,
-    Register.networks[11155111].address
+    Register.networks[1337].address
   );
 
   const [userNature, setUserNature] = useState("");

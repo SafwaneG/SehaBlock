@@ -22,7 +22,7 @@ export default function useLogin() {
   const web3 = new Web3(window.ethereum);
   const contract = new web3.eth.Contract(
     Login.abi,
-    Login.networks[11155111].address
+    Login.networks[1337].address
   );
 
   const detectCurrentProvider = () => {
