@@ -11,7 +11,7 @@ async function getContractInfo({ contractName }) {
   const account = accounts[0];
   const contract = new web3.eth.Contract(
     contractInfo.abi,
-    contractInfo.networks[11155111].address
+    contractInfo.networks[1337].address
   );
   return { account, contract };
 }

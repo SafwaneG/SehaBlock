@@ -5,7 +5,7 @@ import SvgColor from "../../../components/svg-color";
 
 const icon = (name) => (
   <SvgColor
-    src={`/assets/icons/navbar/${name}.png`}
+    src={`${process.env.PUBLIC_URL}/assets/icons/navbar/${name}.png`}
     sx={{ width: 1, height: 1 }}
   />
 );
